@@ -1,29 +1,20 @@
 package co.edu.uniquindio.unitravel.entidades;
 
-import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.io.Serializable;
 
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
-@Entity
-public class Ciudad implements Serializable {
+public class Foto implements Serializable {
 
     @Id
-    private int codigoPostal;
-
-    @Column(nullable = false)
-    private String nombre;
-
-
-
-
+    private Integer codigo;
 }
