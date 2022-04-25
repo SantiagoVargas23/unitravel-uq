@@ -1,20 +1,17 @@
 package co.edu.uniquindio.unitravel.entidades;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@ToString
 public class Ciudad implements Serializable {
 
     @Id
@@ -23,7 +20,17 @@ public class Ciudad implements Serializable {
     @Column(nullable = false)
     private String nombre;
 
+    @OneToMany (mappedBy = "ciudad")
+    @ToString.Exclude
+    private List<Hotel> hoteles;
 
+    @OneToMany (mappedBy = "ciudad")
+    @ToString.Exclude
+    private List<Cliente> clientes;
+
+    @ManyToMany (mappedBy = "ciudades")
+    @ToString.Exclude
+    private List<Vuelo> vuelos;
 
 
 }

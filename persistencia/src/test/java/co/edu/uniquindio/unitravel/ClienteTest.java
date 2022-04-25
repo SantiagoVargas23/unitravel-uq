@@ -7,13 +7,17 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.test.context.jdbc.Sql;
 
 import java.util.List;
+import java.util.Optional;
 
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-public class UsuarioTest {
+public class ClienteTest {
 
     @Autowired
     private ClienteRepo usuarioRepo;
@@ -61,4 +65,35 @@ public class UsuarioTest {
         List<Cliente> clientes= usuarioRepo.findAll();
         System.out.println(clientes);
     }
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void listarUsuariosPorNombre(){
+        List<Cliente> clientes= usuarioRepo.buscarPorNombre("nn1");
+        System.out.println(clientes);
+    }
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void comprobarDatosAutenticacion(){
+        Optional<Cliente> cliente= usuarioRepo.findByCorreoAndPassword("nn3@gmail.com", "12");
+        System.out.println(cliente);
+    }
+
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void listarUsuariosPaginador(){
+
+        Page<Cliente> cliente = usuarioRepo.findAll(PageRequest.of(0, 2));
+        cliente.get().forEach(System.out::println);
+
+    }
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void listarUsuariosSort(){
+        List<Cliente> cliente = usuarioRepo.findAll(Sort.by("nombre"));
+        cliente.forEach(System.out::println);
+
+    }
+
+
+
 }

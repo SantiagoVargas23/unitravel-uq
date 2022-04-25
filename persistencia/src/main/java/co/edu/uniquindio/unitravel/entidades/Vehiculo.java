@@ -7,6 +7,8 @@ import lombok.Setter;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import java.io.Serializable;
 
 @Entity
@@ -21,4 +23,7 @@ public class Vehiculo implements Serializable {
 
     private String tipo;
     private double precio;
+
+    @ManyToOne
+    private Reserva reserva;
 }

@@ -1,12 +1,10 @@
 package co.edu.uniquindio.unitravel.entidades;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -16,6 +14,7 @@ import java.util.Date;
 @Getter
 @Setter
 @NoArgsConstructor
+@ToString
 public class Comentario implements Serializable {
 
     @Id
@@ -26,6 +25,11 @@ public class Comentario implements Serializable {
     private float calificacion;
     private Date fechaCalificacion;
 
+    @ManyToOne
+    private Hotel hotel;
+
+    @ManyToOne
+    private Cliente cliente;
 
 
 }

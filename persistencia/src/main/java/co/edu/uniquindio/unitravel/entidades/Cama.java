@@ -6,7 +6,9 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Getter
@@ -14,6 +16,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @AllArgsConstructor
+@ToString
 public class Cama implements Serializable {
 
     @Id
@@ -21,4 +24,8 @@ public class Cama implements Serializable {
     private int codigo;
 
     private String tipo;
+
+    @ManyToMany
+    @ToString.Exclude
+    private List<Habitacion> habitaciones;
 }

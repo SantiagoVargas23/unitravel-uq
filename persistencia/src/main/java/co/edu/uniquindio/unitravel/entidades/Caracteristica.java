@@ -12,6 +12,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@ToString
 public class Caracteristica implements Serializable {
 
     @Id
@@ -25,11 +26,11 @@ public class Caracteristica implements Serializable {
     @Column(nullable = false, length = 2)
     private String tipo;
 
-//    @ManyToMany(mappedBy = "caracteristicas")
-//    private List<Hotel> hoteles;
+    @ManyToOne
+    private Hotel hotel;
 
-//    @ManyToMany(mappedBy = "caracteristicas")
-//    private List<Habitacion> habitaciones;
+    @ManyToOne
+    private Habitacion habitacion;
 
     public Caracteristica(String nombre, String tipo) {
         this.nombre = nombre;

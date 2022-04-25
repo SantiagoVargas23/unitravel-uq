@@ -13,40 +13,45 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@ToString
 public class Habitacion implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
-    private Integer numero;
+    private int numero;
 
     @Positive
     @Column(nullable = false)
-    private Float precio;
+    private double precio;
 
     @Positive
     @Column(nullable = false)
-    private Integer capacidad;
+    private int capacidad;
 
     @ManyToOne
     private Hotel hotel;
 
-//    @ElementCollection
-//    private List<Cama> camas;
+    @OneToMany(mappedBy = "habitacion")
+    private List<Foto> fotos;
 
-    @ElementCollection
-    private List<String> fotos;
+    @OneToMany(mappedBy = "habitacion")
+    @ToString.Exclude
+    private List<Caracteristica> caracteristicas;
 
-//    @ManyToMany
-//    private List<Caracteristica> caracteristicas;
-//
-//    @OneToMany(mappedBy = "habitacion")
-//    private List<ReservaHabitacion> reservas;
+    @ManyToMany(mappedBy = "habitaciones")
+    @ToString.Exclude
+    private List<Reserva> reservas;
 
-    public Habitacion(Float precio, Integer capacidad, Hotel hotel,  List<String> fotos) {
+    @ManyToMany(mappedBy = "habitaciones")
+    @ToString.Exclude
+    private List<Cama> camas;
+
+
+
+
+    public Habitacion(Float precio, Integer capacidad) {
         this.precio = precio;
         this.capacidad = capacidad;
-        this.hotel = hotel;
-        this.fotos = fotos;
     }
 }

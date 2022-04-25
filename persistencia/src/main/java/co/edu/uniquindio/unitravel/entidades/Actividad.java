@@ -1,19 +1,18 @@
 package co.edu.uniquindio.unitravel.entidades;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.naming.spi.ResolveResult;
+import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Getter
 @Setter
 @NoArgsConstructor
+@ToString
 public class Actividad implements Serializable {
 
     @Id
@@ -22,5 +21,8 @@ public class Actividad implements Serializable {
 
     private String nombre;
     private double precio;
+
+    @ManyToOne
+    private Reserva reserva;
 
 }
